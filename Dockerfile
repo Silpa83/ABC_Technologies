@@ -1,5 +1,6 @@
 FROM docker.io/library/ubuntu:20.04
 RUN apt-get -y update && apt-get -y upgrade
+<<<<<<< HEAD
 RUN apt-get -y install openjdk-17 get
 RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz -O /tmp/apache-tomcat-9.0.91.tar.gz && \
     mkdir /usr/local/tomcat && \
@@ -9,6 +10,7 @@ RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.
 ADD **/*.war /usr/local/tomcat/webapps/
 
 # Expose the port Tomcat is running on
+=======
 EXPOSE 8080
 
 # Run Tomcat
