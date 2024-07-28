@@ -2,15 +2,16 @@ FROM ubuntu:20.04
 
 # Update and upgrade the system
 RUN apt-get -y update && apt-get -y upgrade
+# Set the environment variable to non-interactive to avoid prompts during installation
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Use the official OpenJDK 17 image as the base image
 FROM openjdk:17-jdk
 
-# Install wget
-RUN apt-get update && apt-get install -y wget
-
-# Install Java and wget
-RUN apt-get -y install openjdk-17 wget
+# Update the package list and install wget and OpenJDK 17
+RUN apt-get update && \
+    apt-get install -y wget openjdk-17-jdk && \
+    rm -rf /var/lib/apt/lists/*
 
 # Create the Tomcat directory
 RUN mkdir /usr/local/tomcat
