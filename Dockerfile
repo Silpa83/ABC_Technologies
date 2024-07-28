@@ -1,10 +1,17 @@
-FROM docker.io/library/ubuntu:20.04
-RUN apt-get -y update && apt-get -y upgrade
-RUN apt-get -y install openjdk-17 wget
-RUN mkdir /usr/local/tomcat
-ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.86/bin/apache-tomcat-9.0.86.tar.gz  /tmp/apache-tomcat-9.0.86.tar.gz
-RUN cd /tmp &&  tar xvfz apache-tomcat-9.0.86.tar.gz
-RUN cp -Rv /tmp/apache-tomcat-9.0.86/* /usr/local/tomcat/
-ADD **/*.war /usr/local/tomcat/webapps
+FROM ubuntu:20.04
+
+RUN apt-get update && apt-get install -y wget openjdk-11-jdk
+
+# Download Apache Tomcat
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz -O /tmp/apache-tomcat-9.0.73.tar.gz
+
+# Extract and setup Tomcat
+RUN mkdir /opt/tomcat && \
+    tar xzvf /tmp/apache-tomcat-9.0.73.tar.gz -C /opt/tomcat --strip-components=1
+
+# Add the WAR file to the Tomcat webapps directory
+COPY target/*.war /opt/tomcat/webapps/
+
 EXPOSE 8080
-CMD /usr/local/tomcat/bin/catalina.sh run
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
