@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 FROM docker.io/library/ubuntu:20.04
 RUN apt-get -y update && apt-get -y upgrade
-<<<<<<< HEAD
 RUN apt-get -y install openjdk-17 get
 RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz -O /tmp/apache-tomcat-9.0.91.tar.gz && \
     mkdir /usr/local/tomcat && \
@@ -11,29 +9,8 @@ RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.
 ADD **/*.war /usr/local/tomcat/webapps/
 
 # Expose the port Tomcat is running on
-=======
 EXPOSE 8080
 
 # Run Tomcat
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
-=======
-FROM ubuntu:20.04
-
-# Install necessary packages
-RUN apt-get update && apt-get install -y wget openjdk-11-jdk
-
-# Download and install Apache Tomcat
-RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz -O /tmp/apache-tomcat-9.0.73.tar.gz \
-    && mkdir /opt/tomcat \
-    && tar xzvf /tmp/apache-tomcat-9.0.73.tar.gz -C /opt/tomcat --strip-components=1
-
-# Add the WAR file to the Tomcat webapps directory
-COPY target/*.war /opt/tomcat/webapps/
-
-# Expose the port
-EXPOSE 8080
-
-# Start Tomcat
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
->>>>>>> 597fb1a (Updated Dockerfile for cicd successfully)
 
