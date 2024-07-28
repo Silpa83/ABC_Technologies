@@ -13,3 +13,7 @@ EXPOSE 8080
 
 # Run Tomcat
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 61b75e1 (Successfully updated)
