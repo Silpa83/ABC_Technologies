@@ -1,7 +1,5 @@
 FROM ubuntu:20.04
 
-# Update and upgrade the system
-RUN apt-get -y update && apt-get -y upgrade
 # Set the environment variable to non-interactive to avoid prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
