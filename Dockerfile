@@ -5,13 +5,15 @@ RUN apt-get -y update && apt-get -y upgrade
 # Set the environment variable to non-interactive to avoid prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Use the official OpenJDK 17 image as the base image
-FROM openjdk:17-jdk
+FROM openjdk:17-jdk-slim
 
-# Update the package list and install wget and OpenJDK 17
+# Install wget (and other packages if needed)
 RUN apt-get update && \
-    apt-get install -y wget openjdk-17-jdk && \
+    apt-get install -y wget && \
     rm -rf /var/lib/apt/lists/*
+
+
+RUN apt-get -y update && apt-get -y upgrade
 
 # Create the Tomcat directory
 RUN mkdir /usr/local/tomcat
