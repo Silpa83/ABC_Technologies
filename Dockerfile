@@ -2,7 +2,6 @@ FROM ubuntu:20.04
 
 # Update and upgrade the system
 RUN apt-get -y update && apt-get -y upgrade
-<<<<<<< HEAD
 
 # Install Java and wget
 RUN apt-get -y install openjdk-17 wget
@@ -15,13 +14,6 @@ RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.
     tar -xvf /tmp/apache-tomcat-9.0.91.tar.gz -C /usr/local/tomcat --strip-components=1 && \
     rm /tmp/apache-tomcat-9.0.91.tar.gz
 
-=======
-RUN apt-get -y install openjdk-17 get
-RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz -O /tmp/apache-tomcat-9.0.91.tar.gz && \
-    mkdir /usr/local/tomcat && \
-    tar -xvf /tmp/apache-tomcat-9.0.91.tar.gz -C /usr/local/tomcat --strip-components=1 && \
-    rm /tmp/apache-tomcat-9.0.91.tar.gz
->>>>>>> main
 # Copy WAR files to Tomcat's webapps directory
 ADD **/*.war /usr/local/tomcat/webapps/
 
