@@ -46,15 +46,20 @@ pipeline {
 	        }
 		}
 				
-		stage('docker deploy') {
-	       steps {
-	           echo "deploying the abc docker container into tomact server"
-	           sh 'docker stop abc-container || true'
-			   sh 'docker rm -f abc-container || true'
-			   sh 'docker run -d -p 9090:8080 --name abc-container suryalankeladevops/abc_technologies:$BUILD_NUMBER'
-	        }
-		          
-		}
+	stage('Deploy Docker Container')
+       {
+        steps 
+        {
+         script
+         {
+            sh '''
+                docker stop abc-container || true
+                docker rm -f abc-container || true
+                docker run --dns 8.8.8.8 --dns 1.1.1.1 -d -p 9090:8080 --name abc-container silpanandipati/abc_technologies:${BUILD_NUMBER}
+            '''
+          }
+         }
+       }
 
     }
 }
