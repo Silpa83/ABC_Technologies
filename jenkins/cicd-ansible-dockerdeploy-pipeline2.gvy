@@ -15,17 +15,18 @@ pipeline {
 
         }
 
-        stage('package') {
-           steps {
-              echo "generate the war file"
-              sh 'mvn package'
-           }
-
-           post {
-             always {
-               archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
-             }
-           }
+        stage('Package') 
+        {
+            steps
+            {
+                echo "Generating the WAR file..."
+                sh 'mvn package'
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+                }
+            }
         }
 		stage('docker login & ansible playbook for docker build and push') {
 	       steps {
