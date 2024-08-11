@@ -1,18 +1,28 @@
 pipeline {
-    agent any
+     agent any
+    
+     options {
+        skipDefaultCheckout()
+     }
+    tools
+    {
+        maven 'Apache Maven 3.8.7'
+    }
 
-    tools {
-       maven 'maven3.9'
-       }
     stages {
-       stage('code compile') {
-           steps {
-             echo "perform code compiling.."
-             git 'https://github.com/suryalankeladevops/AGC_Technologies.git'
-             sh 'mvn compile'
+        stage('Setup Git Identity') {
+            steps {
+                sh 'git config --global user.name "SilpaNandipati"'
+                sh 'git config --global user.email SilpaNandipati@github.com'
+            }
+        }
 
-           }
-
+        stage('Code Compile') {
+            steps {
+                echo "Performing code compilation..."
+                git 'https://github.com/Silpa83/ABC_Technologies.git'
+                sh 'mvn compile'
+            }
         }
 
         stage('package') {
