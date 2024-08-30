@@ -10,11 +10,11 @@
       shell:
         cmd: |
           cd {{ workspace }}
-          docker build --file Dockerfile --tag suryalankeladevops/abc_technologies:{{ build_number }} .
+          docker build --file Dockerfile --tag silpanandipati/abc_technologies:${{ BUILD_NUMBER }} .
       vars:
         workspace: "{{ lookup('env', 'WORKSPACE') }}"
 
     - name: Push Docker image
       shell:
         cmd: |
-          docker push docker.io/suryalankeladevops/abc_technologies:{{ build_number }}
+          docker push docker.io/silpanandipati/abc_technologies:${{ BUILD_NUMBER }}
